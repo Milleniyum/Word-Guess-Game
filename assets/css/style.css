@@ -52,7 +52,8 @@ p {
 }
 
 #word, #guessed {
-  letter-spacing: 0.5em;
+  letter-spacing: 1em;
+  padding-left: 1em;
 }
 
 /* Media Queries */
