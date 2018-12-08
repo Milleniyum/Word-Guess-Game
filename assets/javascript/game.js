@@ -1,11 +1,19 @@
 var wins = 0, remaining;
 var word = "", guesses = [], indexChosen = [];
-var words = ["neo", "trinity", "morpheus", "spoon", "oracle", "smith", "zion", "cypher", "tank", "electro", "sentinel", "battery", "architect", "keymaker", "bullets"];
+var words = ["neo", "trinity", "morpheus", "spoon", "oracle", "smith", "zion", "cypher", "kungfu", "tank", "sentinel", "battery", "architect", "keymaker", "bullets"];
 var winsP = document.getElementById("wins");
 var wordP = document.getElementById("word");
 var remainingP = document.getElementById("remaining");
 var guessedP = document.getElementById("guessed");
 var picRef = document.getElementById("word-pic");
+var audioTheme = document.createElement("audio");
+audioTheme.setAttribute("src", "assets/audio/matrix_theme.mp3");
+var audioWin = document.createElement("audio");
+
+function playAudio(file) {
+    audioWin.setAttribute("src", file);
+    audioWin.play();
+}
 
 var newWord = function () {
     if (indexChosen.length === words.length) {
@@ -29,19 +37,18 @@ var newWord = function () {
         guesses = [];
         guessedP.textContent = "";
 
-        console.log(words[randIndex]);
         return words[randIndex].toLowerCase();
-    }   
+    }
 }
 
 document.onkeyup = function (event) {
     if (event.keyCode > 64 && event.keyCode < 91 && guesses.indexOf(event.key.toLowerCase()) === -1) {
-        
+
         remaining--;
         remainingP.textContent = remaining;
 
         guesses.push(event.key.toLowerCase());
-        
+
         guessedP.textContent += event.key.toUpperCase();
 
         wordP.textContent = "";
@@ -57,29 +64,24 @@ document.onkeyup = function (event) {
             wins++;
             winsP.textContent = wins;
             picRef.setAttribute("src", "assets/images/matrix_" + word + ".jpg");
+            playAudio("assets/audio/matrix_" + word + ".mp3");
             word = newWord();
         } else if (remaining === 0) {
             word = newWord();
-        }        
+        }
     }
-    
-
-    
-    
 }
 
 word = newWord();
 
-var audio = new Audio("assets/audio/mtrx-realworld.mp3");
-
 var logoClick = document.getElementById("logo-2");
 logoClick.onclick = function () {
 
-    if (audio.currentTime !== 0.0) {
-        audio.pause();
-        audio.currentTime = 0.0;
+    if (audioTheme.currentTime !== 0.0) {
+        audioTheme.pause();
+        audioTheme.currentTime = 0.0;
     } else {
-        audio.play();
+        audioTheme.play();
     }
 }
 
