@@ -1,5 +1,6 @@
 body {
     background-image: url("../images/matrix_background.jpg");
+    font-family: 'Russo One', sans-serif;
 }
 
 .header {
@@ -54,6 +55,10 @@ p {
 #word, #guessed {
   letter-spacing: 1em;
   padding-left: 1em;
+}
+
+#guessed {
+  padding-bottom: 10px;
 }
 
 /* Media Queries */
